@@ -25,7 +25,7 @@ This folder defines a Terraform module, which you can use in your code by adding
 
 ```hcl
 module "aad_group_members" {
-  source = "github.com/ppanyukov/Terraform.Modiules//azure/aad_group_members"
+  source = "github.com/ppanyukov/Terraform.Modules//azure/aad_group_members"
 
   # Specify the name of the group to add members to.
   group_name = "target_group_name"
