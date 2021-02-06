@@ -61,28 +61,28 @@ module "aad_group_members" {
 Given the above HCL, when you do `terraform plan`, the output will be like follows. Note that now it is easy to see what gets added to which group.
 
 ```hcl
-# module.aad_group_members.azuread_group_member.group["member_group_1 to target_group_name"]:
+# module.aad_group_members.azuread_group_member.group["member_group_1 in target_group_name"]:
 resource "azuread_group_member" "group" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/11111111-b263-4379-bc84-b17e59de27fa"
     member_object_id = "11111111-b263-4379-bc84-b17e59de27fa"
 }
 
-# module.aad_group_members.azuread_group_member.group["member_group_2 to target_group_name"]:
+# module.aad_group_members.azuread_group_member.group["member_group_2 in target_group_name"]:
 resource "azuread_group_member" "group" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/11111111-b263-4379-bc84-b17e59de27fa"
     member_object_id = "11111111-b263-4379-bc84-b17e59de27fa"
 }
 
-# module.aad_group_members.azuread_group_member.user["user1@myorg.com to target_group_name"]:
+# module.aad_group_members.azuread_group_member.user["user1@myorg.com in target_group_name"]:
 resource "azuread_group_member" "user" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/11111111-c18a-404b-8f76-97df7439c2c6"
     member_object_id = "11111111-c18a-404b-8f76-97df7439c2c6"
 }
 
-# module.aad_group_members.azuread_group_member.user["user2@myorg.com to target_group_name"]:
+# module.aad_group_members.azuread_group_member.user["user2@myorg.com in target_group_name"]:
 resource "azuread_group_member" "user" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/11111111-c18a-404b-8f76-97df7439c2c6"

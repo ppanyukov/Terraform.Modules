@@ -25,7 +25,7 @@ locals {
   # what we actually want.
   group_members = {
     for member_name in var.member_group_names :
-    "${member_name} to ${var.group_name}" => {
+    "${member_name} in ${var.group_name}" => {
       group_name  = var.group_name
       member_name = member_name
     }
@@ -33,7 +33,7 @@ locals {
 
   user_members = {
     for member_name in var.member_user_names :
-    "${member_name} to ${var.group_name}" => {
+    "${member_name} in ${var.group_name}" => {
       group_name  = var.group_name
       member_name = member_name
     }
