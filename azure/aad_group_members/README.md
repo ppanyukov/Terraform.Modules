@@ -75,14 +75,14 @@ resource "azuread_group_member" "group" {
     member_object_id = "11111111-b263-4379-bc84-b17e59de27fa"
 }
 
-# module.app_group_members.azuread_group_member.user["user1@myorgcom to target_group_name"]:
+# module.app_group_members.azuread_group_member.user["user1@myorg.com to target_group_name"]:
 resource "azuread_group_member" "user" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/90155178-c18a-404b-8f76-97df7439c2c6"
     member_object_id = "11111111-c18a-404b-8f76-97df7439c2c6"
 }
 
-# module.app_group_members.azuread_group_member.user["user2@myorgcom to target_group_name"]:
+# module.app_group_members.azuread_group_member.user["user2@myorg.com to target_group_name"]:
 resource "azuread_group_member" "user" {
     group_object_id  = "11111111-5687-4682-aa95-9bafae2f2f86"
     id               = "11111111-5687-4682-aa95-9bafae2f2f86/member/90155178-c18a-404b-8f76-97df7439c2c6"
