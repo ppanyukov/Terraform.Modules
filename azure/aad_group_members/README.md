@@ -4,17 +4,17 @@ This folder contains a Terraform module to manage group membership in Azure Acti
 
 Motivation for the module:
 
+* Display Terraform Plan which is meaningful.
+
+    The raw resource `azuread_group_member` only shows object IDs
+    which makes it impossible to make judgement whether the assignment is correct. See: https://github.com/hashicorp/terraform-provider-azuread/issues/390
+
+
 * Make it a simple one-stop shop for all group membership operations using familiar names, including:
     * Group members.
     * User members.
     * Managed Identity members (TODO).
     * Service Principal members (TODO).
-
-* Display Terraform Plan which is meaningful.
-
-    The raw resource `azuread_group_member` only shows object IDs
-    which makes it impossible to make judgement whether the assignment
-    is correct.
 
 
 ## How to use this module?
