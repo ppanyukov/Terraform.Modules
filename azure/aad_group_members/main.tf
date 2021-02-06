@@ -18,9 +18,9 @@ variable "member_user_names" {
 }
 
 variable "member_msi_names" {
-  type        = list(object({
+  type = list(object({
     resource_group_name = string
-    name = string 
+    name                = string
   }))
   description = "List of Managed Identity names to add as members of the group."
   default     = []
@@ -51,8 +51,8 @@ locals {
   msi_members = {
     for member_name in var.member_msi_names :
     "${member_name.resource_group_name}/${member_name.name} in ${var.group_name}" => {
-      group_name  = var.group_name
-      member_name = member_name.name
+      group_name          = var.group_name
+      member_name         = member_name.name
       resource_group_name = member_name.resource_group_name
     }
   }
@@ -74,7 +74,7 @@ data "azuread_user" "user_to_add_as_member" {
 
 data "azurerm_user_assigned_identity" "msi_to_add_as_member" {
   for_each            = local.msi_members
-  name = each.value.member_name
+  name                = each.value.member_name
   resource_group_name = each.value.resource_group_name
 }
 
