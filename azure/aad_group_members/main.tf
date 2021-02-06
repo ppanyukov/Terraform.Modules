@@ -17,6 +17,15 @@ variable "member_user_names" {
   default     = []
 }
 
+variable "member_msi_names" {
+  type        = list(object({
+    resource_group_name = string
+    name = string 
+  }))
+  description = "List of Managed Identity names to add as members of the group."
+  default     = []
+}
+
 locals {
   # Create the set of group members so that the key
   # is descriptive and shows which member gets added to which group.
@@ -38,6 +47,15 @@ locals {
       member_name = member_name
     }
   }
+
+  msi_members = {
+    for member_name in var.member_msi_names :
+    "${member_name.resource_group_name}/${member_name.name} in ${var.group_name}" => {
+      group_name  = var.group_name
+      member_name = member_name.name
+      resource_group_name = member_name.resource_group_name
+    }
+  }
 }
 
 data "azuread_group" "target_group" {
@@ -54,6 +72,12 @@ data "azuread_user" "user_to_add_as_member" {
   user_principal_name = each.value.member_name
 }
 
+data "azurerm_user_assigned_identity" "msi_to_add_as_member" {
+  for_each            = local.msi_members
+  name = each.value.member_name
+  resource_group_name = each.value.resource_group_name
+}
+
 resource "azuread_group_member" "group" {
   for_each         = local.group_members
   group_object_id  = data.azuread_group.target_group.id
@@ -64,6 +88,12 @@ resource "azuread_group_member" "user" {
   for_each         = local.user_members
   group_object_id  = data.azuread_group.target_group.id
   member_object_id = data.azuread_user.user_to_add_as_member[each.key].id
+}
+
+resource "azuread_group_member" "msi" {
+  for_each         = local.msi_members
+  group_object_id  = data.azuread_group.target_group.id
+  member_object_id = data.azurerm_user_assigned_identity.msi_to_add_as_member[each.key].principal_id
 }
 
 
